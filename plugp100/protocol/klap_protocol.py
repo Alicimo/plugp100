@@ -41,7 +41,7 @@ class KlapProtocol(TapoProtocol):
             aiohttp.ClientSession() if http_session is None else http_session
         )
         self._klap_session: Optional[KlapSession] = None
-        self._host = urllib3.get_host(self._base_url)
+        self._host = urllib3.util.parse_url(self._base_url).host
 
     async def send_request(
         self, request: TapoRequest, retry: int = 3
